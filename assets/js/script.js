@@ -38,6 +38,8 @@ function runGame(gameType) {
         displayAdditionQuestion(num1, num2) 
     } else if (gameType === "multiply") {
         displayMultipleQuestion(num1, num2)
+    } else if (gameType === "subtract") {
+        displaySubtractQuestion(num1, num2)   
     } else {
         alert(`Unknown game type: ${gameType}`)
         throw `Unknown game type: ${gameType}. Aborting!`
@@ -79,6 +81,8 @@ function calculateCorrectAnswer() {
         return [operand1 + operand2, "additon"]  
     } else if (operator === "x") {
         return [operand1 * operand2, "multiply"]
+    } else if (operator === "-") {
+        return [operand1 - operand2, "subtract"]    
     } else {
         alert(`Unimplemented operator ${operator}`)
         throw `Unimplemented operator ${operator}. Aborting!`
@@ -112,8 +116,13 @@ function displayAdditionQuestion(operand1, operand2) {
     document.getElementById("operator").textContent = "+"
 }
 
-function displaySubtractQuestion() {
-
+/* We are using a JS ternary operator here (could have used an if else statement but this is less code) to essentially ask
+the computer which is better operand 1 or operand 2? If 1 is bigger, return that. If 2 is bigger, return that instead. The 
+condition we are checking goes before the question mark. The else part comes after the colon*/
+function displaySubtractQuestion(operand1, operand2) {
+    document.getElementById("operand1").textContent = operand1 > operand2 ? operand1 : operand2
+    document.getElementById("operand2").textContent = operand1 > operand2 ? operand1 : operand2
+    document.getElementById("operator").textContent = "-"
 }
 
 function displayMultipleQuestion(operand1, operand2) {
@@ -122,3 +131,5 @@ function displayMultipleQuestion(operand1, operand2) {
     document.getElementById("operator").textContent = "x"
 
 }
+
+
